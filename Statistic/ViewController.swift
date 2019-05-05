@@ -14,6 +14,8 @@ class ViewController: UIViewController {
 
     let _barChartView = BarChartContainerView()
 
+    var bars = [Bar]()
+
     lazy var headerView: UIView = {
         let _headerView = UIView()
         _headerView.createShadow(opacity: 0.4, offset: CGSize(width: 0, height: 5), radius: 8, color: #colorLiteral(red: 0.3092674613, green: 0.3397194743, blue: 0.8171567321, alpha: 1))
@@ -42,6 +44,8 @@ class ViewController: UIViewController {
     }
 
     fileprivate func setup() {
+//        let _barChartNib = UINib(nibName: "BarChartContainerView", bundle: nil)
+//        let _barChartView = _barChartNib.instantiate(withOwner: self, options: nil).first as! UIView
         self.view.addSubview(headerView)
         self.view.addSubview(_barChartView)
 

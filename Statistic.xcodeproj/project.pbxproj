@@ -15,7 +15,8 @@
 		2B946C6C227A04C2008B7ADC /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B946C6B227A04C2008B7ADC /* UIView+Extensions.swift */; };
 		2B946C6E227A0B99008B7ADC /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B946C6D227A0B99008B7ADC /* UILabel.swift */; };
 		2B946C71227A1A84008B7ADC /* BarChartContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B946C70227A1A84008B7ADC /* BarChartContainerView.swift */; };
-		2B946C75227A2D64008B7ADC /* BarChartCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B946C74227A2D64008B7ADC /* BarChartCollectionViewController.swift */; };
+		2BA4D677227D850E00F24091 /* BarChartContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BA4D676227D850E00F24091 /* BarChartContainerView.xib */; };
+		2BEB4A87227B48A9002DBFA7 /* Bar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEB4A86227B48A9002DBFA7 /* Bar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +30,8 @@
 		2B946C6B227A04C2008B7ADC /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		2B946C6D227A0B99008B7ADC /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		2B946C70227A1A84008B7ADC /* BarChartContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartContainerView.swift; sourceTree = "<group>"; };
-		2B946C74227A2D64008B7ADC /* BarChartCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartCollectionViewController.swift; sourceTree = "<group>"; };
+		2BA4D676227D850E00F24091 /* BarChartContainerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BarChartContainerView.xib; sourceTree = "<group>"; };
+		2BEB4A86227B48A9002DBFA7 /* Bar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 		2B946C572279E4FA008B7ADC /* Statistic */ = {
 			isa = PBXGroup;
 			children = (
+				2BEB4A85227B489D002DBFA7 /* Models */,
 				2B946C6F227A1A72008B7ADC /* Views */,
 				2B946C6A227A049C008B7ADC /* Extensions */,
 				2B946C582279E4FA008B7ADC /* AppDelegate.swift */,
@@ -87,9 +90,17 @@
 			isa = PBXGroup;
 			children = (
 				2B946C70227A1A84008B7ADC /* BarChartContainerView.swift */,
-				2B946C74227A2D64008B7ADC /* BarChartCollectionViewController.swift */,
+				2BA4D676227D850E00F24091 /* BarChartContainerView.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		2BEB4A85227B489D002DBFA7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2BEB4A86227B48A9002DBFA7 /* Bar.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +164,7 @@
 				2B946C632279E4FC008B7ADC /* LaunchScreen.storyboard in Resources */,
 				2B946C602279E4FC008B7ADC /* Assets.xcassets in Resources */,
 				2B946C5E2279E4FA008B7ADC /* Main.storyboard in Resources */,
+				2BA4D677227D850E00F24091 /* BarChartContainerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,7 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B946C6C227A04C2008B7ADC /* UIView+Extensions.swift in Sources */,
-				2B946C75227A2D64008B7ADC /* BarChartCollectionViewController.swift in Sources */,
+				2BEB4A87227B48A9002DBFA7 /* Bar.swift in Sources */,
 				2B946C5B2279E4FA008B7ADC /* ViewController.swift in Sources */,
 				2B946C71227A1A84008B7ADC /* BarChartContainerView.swift in Sources */,
 				2B946C6E227A0B99008B7ADC /* UILabel.swift in Sources */,
