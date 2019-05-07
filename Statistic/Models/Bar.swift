@@ -11,6 +11,6 @@ import UIKit
 
 struct Bar {
     let index: Int
-    let percentageComplete: Double
+    let percentageComplete: CGFloat
     let color: UIColor
 }
