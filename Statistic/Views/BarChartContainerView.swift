@@ -162,21 +162,28 @@ class BarCell: UICollectionViewCell {
 //        barFillView.backgroundColor = item.color
 
 
+        barLabel.text = String(self.item.index)
+        
         let dotView = UIView()
         dotView.translatesAutoresizingMaskIntoConstraints = false
-        dotView.heightAnchor.constraint(equalToConstant: 5).isActive = true
-        dotView.widthAnchor.constraint(equalToConstant: 5).isActive = true
-        dotView.layer.cornerRadius = 5/2
+        dotView.layer.cornerRadius = (self.frame.height * 0.05) / 2
         dotView.layer.masksToBounds = true
         dotView.backgroundColor = .red
 
+        barLabel.backgroundColor = .white
 
+//        let fillHeight = barView.frame.height * self.item.percentageComplete
+//        barFillView.frame = CGRect(x: 0, y: 10, width: self.frame.width, height: fillHeight)
+//        barFillView.backgroundColor = self.item.color
+//
         let stack = UIStackView(arrangedSubviews: [barView, dotView, barLabel])
         stack.axis = .vertical
         stack.spacing = 4
         stack.distribution = .fill
 
         self.addSubview(stack)
+        self.addSubview(barFillView)
+        NSLayoutConstraint.activate([NSLayoutConstraint(item: dotView, attribute: .height, relatedBy: .equal, toItem: stack, attribute: .height, multiplier: 0.05, constant: 0)])
         stack.anchors(top: self.topAnchor, leading: self.leadingAnchor, trailing: self.trailingAnchor, bottom: self.bottomAnchor)
     }
 }
