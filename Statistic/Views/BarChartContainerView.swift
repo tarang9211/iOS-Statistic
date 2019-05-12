@@ -87,7 +87,7 @@ class BarChartContainerView: UIView, UICollectionViewDataSource, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 10, height: _collectionView!.frame.height)
+        return CGSize(width: 12, height: _collectionView!.frame.height)
     }
 
 
@@ -112,23 +112,38 @@ class BarCell: UICollectionViewCell {
         let view = UIView()
         view.backgroundColor = UIColor(white: 0.95, alpha: 1)
         view.layer.cornerRadius = 3
+
+        view.addSubview(barFillView)
+        self.barFillView.anchors(top: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor, bottom: view.bottomAnchor)
+
+        self.barFillHeightConstraint = self.barFillView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        self.barFillHeightConstraint.isActive = true
         return view
     }()
-
-//    lazy var barView: UIView = {
-//        let view = UIView()
-//        view.backgroundColor = UIColor(white: 0.95, alpha: 1)
-//        view.layer.cornerRadius = 3
-////        self.addSubview(view)
-////        view.addSubview(barFillView)
-////        self.barFillHeightConstraint = self.barFillView.heightAnchor.constraint(equalTo: self.heightAnchor)
-////        self.barFillHeightConstraint.isActive = true
-//        return view
-//    }()
 
     lazy var barFillView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 4
+        view.backgroundColor = .blue
+        return view
+    }()
+
+    lazy var dotViewContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        return view
+    }()
+
+    lazy var dotView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.dotViewWidthConstraint = view.widthAnchor.constraint(equalToConstant: 0)
+        self.dotViewHeightConstraint = view.heightAnchor.constraint(equalToConstant: 0)
+        self.dotViewHeightConstraint.isActive = false
+        self.dotViewWidthConstraint.isActive = false
         return view
     }()
 
@@ -142,49 +157,43 @@ class BarCell: UICollectionViewCell {
     }
 
     fileprivate func setup() {
-//        barView.translatesAutoresizingMaskIntoConstraints = false
-//        barView.heightAnchor.constraint(equalToConstant: self.frame.height).isActive = true
-//        barView.widthAnchor.constraint(equalToConstant: width).isActive = true
-//
-//        guard let item = item else { return }
-//
-//        barFillView.translatesAutoresizingMaskIntoConstraints = false
-//        barFillView.widthAnchor.constraint(equalToConstant: width).isActive = true
-//        barFillView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-//
-//        barLabel.translatesAutoresizingMaskIntoConstraints = false
-//        barLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-//        barLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-
-//        barFillHeightConstraint.isActive = false
-//        barFillHeightConstraint = self.barFillView.heightAnchor.constraint(equalTo: self.barView.heightAnchor, multiplier: item.percentageComplete)
-//        barFillHeightConstraint.isActive = true
-//        barFillView.backgroundColor = item.color
-
-
-        barLabel.text = String(self.item.index)
-        
-        let dotView = UIView()
-        dotView.translatesAutoresizingMaskIntoConstraints = false
-        dotView.layer.cornerRadius = (self.frame.height * 0.05) / 2
-        dotView.layer.masksToBounds = true
-        dotView.backgroundColor = .red
-
-        barLabel.backgroundColor = .white
-
-//        let fillHeight = barView.frame.height * self.item.percentageComplete
-//        barFillView.frame = CGRect(x: 0, y: 10, width: self.frame.width, height: fillHeight)
-//        barFillView.backgroundColor = self.item.color
-//
-        let stack = UIStackView(arrangedSubviews: [barView, dotView, barLabel])
+        let stack = UIStackView(arrangedSubviews: [barView, dotViewContainer, barLabel])
         stack.axis = .vertical
-        stack.spacing = 4
         stack.distribution = .fill
-
         self.addSubview(stack)
-        self.addSubview(barFillView)
-        NSLayoutConstraint.activate([NSLayoutConstraint(item: dotView, attribute: .height, relatedBy: .equal, toItem: stack, attribute: .height, multiplier: 0.05, constant: 0)])
         stack.anchors(top: self.topAnchor, leading: self.leadingAnchor, trailing: self.trailingAnchor, bottom: self.bottomAnchor)
+
+        //reset the height constraint for the barFillView to match the item percentage
+        self.barFillHeightConstraint.isActive = false
+        self.barFillHeightConstraint = self.barFillView.heightAnchor.constraint(equalTo: self.barView.heightAnchor, multiplier: item.percentageComplete)
+        self.barFillHeightConstraint.isActive = true
+        self.barFillView.backgroundColor = item.color
+
+
+        //reset the dotview constaints
+        self.dotViewContainer.addSubview(dotView)
+
+        if item.index % 6 == 0 {
+            self.dotViewHeightConstraint.constant = 6
+            self.dotViewWidthConstraint.constant = 6
+            self.dotView.layer.cornerRadius = 3
+        } else {
+            self.dotViewHeightConstraint.constant = 4
+            self.dotViewWidthConstraint.constant = 4
+            self.dotView.layer.cornerRadius = 2
+        }
+        self.dotViewHeightConstraint.isActive = true
+        self.dotViewWidthConstraint.isActive = true
+
+        //center the dotview in the superview i.e. dotViewContainer
+        self.dotView.centerXAnchor.constraint(equalTo: self.dotViewContainer.centerXAnchor).isActive = true
+        self.dotView.centerYAnchor.constraint(equalTo: self.dotViewContainer.centerYAnchor).isActive = true
+
+        barLabel.text = String(item.index)
+        barLabel.textColor = item.index % 6 == 0 ? .lightGray : .clear
+        barLabel.textAlignment = .center
+        barLabel.numberOfLines = 0
+
     }
 }
 
